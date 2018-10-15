@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME_Creative_Studio_codingChallenge_SKaczorowski", "ME_Creative_Studio_codingChallenge_SKaczorowski\ME_Creative_Studio_codingChallenge_SKaczorowski.csproj", "{8D55E61E-5D40-4A7C-A2C8-F27C9B7E1B60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME_Creative_Studio_coddingChallenge_Specs", "ME_Creative_Studio_coddingChallenge_tests\ME_Creative_Studio_coddingChallenge_Specs.csproj", "{807EB75B-9A92-4B54-AB47-84370CF48624}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ME_Creative_Studio_codingChallenge_Specs", "ME_Creative_Studio_coddingChallenge_tests\ME_Creative_Studio_codingChallenge_Specs.csproj", "{807EB75B-9A92-4B54-AB47-84370CF48624}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
