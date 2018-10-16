@@ -11,11 +11,11 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
         [TestMethod]
         public void Pow_ForBase3AndExponent3ShouldReturn27()
         {
-            float pbase = 3;
+            double pbase = 3;
             int exponent = 3;
-            float expected = 27;
+            double expected = 27;
 
-            float result = CustomMath.Pow(pbase, exponent);
+            double result = CustomMath.Pow(pbase, exponent);
 
             Assert.AreEqual(expected, result);
         }
@@ -23,35 +23,23 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
         [TestMethod]
         public void Pow_ShouldReturnSameNumberWhenExponentIs1()
         {
-            float pbase = 3;
+            double pbase = 3;
             int exponent = 1;
-            float expected = 3;
+            double expected = 3;
 
-            float result = CustomMath.Pow(pbase, exponent);
+            double result = CustomMath.Pow(pbase, exponent);
 
-            Assert.AreEqual(expected, result);
-        }
-
-        [TestMethod]
-        public void Pow_ShouldCalulatePowerOfFloatValue()
-        {
-            float pbase = 2.5f;
-            int exponent = 2;
-            float expected = 6.25f;
-
-            float result = CustomMath.Pow(pbase, exponent);
-           
             Assert.AreEqual(expected, result);
         }
 
         [TestMethod]
         public void Pow_ShouldReturn1WhenExponentIs0()
         {
-            float pbase = 3;
+            double pbase = 3;
             int exponent = 0;
-            float expected = 1;
+            double expected = 1;
 
-            float result = CustomMath.Pow(pbase, exponent);
+            double result = CustomMath.Pow(pbase, exponent);
 
             Assert.AreEqual(expected, result);
         }
@@ -59,21 +47,66 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
         [TestMethod]
         public void Abs_ShouldReturnPositiveNumberWhenGivenNegativeNumber()
         {
-            float numberToAbs = -5;
-            float expected = 5;
+            double numberToAbs = -5;
+            double expected = 5;
 
-            float result = CustomMath.Abs(numberToAbs);
+            double result = CustomMath.Abs(numberToAbs);
             Assert.AreEqual(expected, result);
         }
 
         [TestMethod]
         public void Abs_ShouldReturnSameNumberWhenGivenPositiveNumber()
         {
-            float numberToAbs = 5;
-            float expected = 5;
+            double numberToAbs = 5;
+            double expected = 5;
 
-            float result = CustomMath.Abs(numberToAbs);
+            double result = CustomMath.Abs(numberToAbs);
             Assert.AreEqual(expected, result);
+        }
+
+        [TestMethod]
+        public void Root_ShouldCalculateSquareRootOfNumberWithinGivenEpsilon()
+        {
+            long rBase = 4;
+            int root = 2;
+            double epsilon = 0.01;
+
+            double result = CustomMath.Root(rBase, root, epsilon);
+
+            Assert.IsTrue(CustomMath.Abs((result * result) - rBase) < epsilon);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Root_ShouldThrowExceptionWhenRbaseIsToLongerThan17()
+        {
+            long rBase = 123456789123456789;
+            int root = 2;
+            double epsilon = 0.01;
+
+            double result = CustomMath.Root(rBase, root, epsilon);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Root_ShouldThrowExceptionWhenRootIsLowerThan1()
+        {
+            long rBase = 4;
+            int root = 0;
+            double epsilon = 0.01;
+
+            double result = CustomMath.Root(rBase, root, epsilon);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void Root_ShouldThrowExceptionWhenRootIsHigherThan10()
+        {
+            long rBase = 4;
+            int root = 11;
+            double epsilon = 0.01;
+
+            double result = CustomMath.Root(rBase, root, epsilon);
         }
     }
 }
