@@ -53,35 +53,56 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             return powPartial * powPartial;
         }
 
+        //99999999999999999
+        //66666666666666666
+        //55555555555555555
         public static decimal Root(long rBase, int root, double epsilon)
         {
             if (!IsRootInputValidate(rBase, root))
                 throw new ArgumentOutOfRangeException("root base should have maximum 17 digits and root should be between 0 and 10");
-
+            
             double valueEstimated = rBase;
-            double valueEstimatedPrevious = -1;
-
-            while (epsilon < Abs(rBase - Pow(valueEstimated, root)))
+            double valueEstimatedPrevious;
+            double currentError = Abs(rBase - Pow(valueEstimated, root));
+            double previousError;
+        
+            while (epsilon < currentError)
             {
+                previousError = currentError;
+
+                valueEstimatedPrevious = valueEstimated;
                 valueEstimated = (1 / (double)root) * (((double)root - 1) * valueEstimated + rBase / Pow(valueEstimated, root - 1));
 
-                if (valueEstimatedPrevious == valueEstimated)
+                currentError = Abs(rBase - Pow(valueEstimated, root));
+
+                if (previousError <= currentError)
                 {
-                    decimal valueEstimatedPrecise = RootWithEnchancedPrecision(rBase, valueEstimated, root, epsilon);
+                    decimal valueEstimatedPrecise = RootWithEnchancedPrecision(valueEstimated, rBase, root, epsilon);
                     return valueEstimatedPrecise;
                 }
-                valueEstimatedPrevious = valueEstimated;
+
+
             }
 
             return (decimal)valueEstimated;
         }
 
-        private static decimal RootWithEnchancedPrecision(long rBase, double currentEstimatedValue, int root, double epsilon)
+        private static decimal RootWithEnchancedPrecision(double currentEstimatedValue, long rBase, int root, double epsilon)
         {
             decimal valueEstimatedPrecise = (decimal)currentEstimatedValue;
-            while ((decimal)epsilon < Abs(rBase - Pow(valueEstimatedPrecise, root)))
+            decimal currentError = Abs(rBase - Pow(valueEstimatedPrecise, root));
+            decimal previousError;
+
+            while ((decimal)epsilon < currentError)
             {
+                previousError = currentError;
                 valueEstimatedPrecise = (1 / (decimal)root) * (((decimal)root - 1) * valueEstimatedPrecise + rBase / Pow(valueEstimatedPrecise, root - 1));
+                currentError = Abs(rBase - Pow(valueEstimatedPrecise, root));
+
+                if (previousError <= currentError)
+                {
+                    break;
+                }
             }
             return valueEstimatedPrecise;
         }

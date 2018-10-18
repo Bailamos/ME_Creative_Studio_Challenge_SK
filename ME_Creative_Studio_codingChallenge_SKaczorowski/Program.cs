@@ -20,7 +20,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 
                 decimal value = CustomMath.Root(number, root, epsilon);
                 System.Console.WriteLine(root + "th root of number " + number + " is: " + value + " with estimated max error of: " + epsilon);
-            }
+            }   
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.Message);
