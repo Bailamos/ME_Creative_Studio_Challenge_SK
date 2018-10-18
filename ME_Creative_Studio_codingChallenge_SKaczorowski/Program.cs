@@ -10,7 +10,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             long number;
             int root;
             double epsilon = 0.0001d;
-            Console.WriteLine(Math.Abs(12));
+
             while (true) {
                 try
                 {

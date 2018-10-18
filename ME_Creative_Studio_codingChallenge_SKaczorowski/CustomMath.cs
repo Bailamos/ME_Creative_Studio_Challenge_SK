@@ -59,37 +59,37 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             if (!IsRootInputValidate(number, root))
                 throw new ArgumentOutOfRangeException("root base should have maximum 17 digits and root should be between 1 and 10");
             
-            double valueEstimated = number;
-            double currentError = Abs(number - Pow(valueEstimated, root));
+            double rootValueEstimated = number;
+            double currentError = Abs(number - Pow(rootValueEstimated, root));
             double previousError;
         
             while (epsilon < currentError)
             {
                 previousError = currentError;
-                valueEstimated = (1 / (double)root) * (((double)root - 1) * valueEstimated + number / Pow(valueEstimated, root - 1));
-                currentError = Abs(number - Pow(valueEstimated, root));
+                rootValueEstimated = (1 / (double)root) * (((double)root - 1) * rootValueEstimated + number / Pow(rootValueEstimated, root - 1));
+                currentError = Abs(number - Pow(rootValueEstimated, root));
 
                 if (previousError <= currentError)
                 {
-                    decimal valueEstimatedPrecise = RootWithEnchancedPrecision(valueEstimated, number, root, epsilon);
+                    decimal valueEstimatedPrecise = RootWithEnchancedPrecision(rootValueEstimated, number, root, epsilon);
                     return valueEstimatedPrecise;
                 }
             }
 
-            return (decimal)valueEstimated;
+            return (decimal)rootValueEstimated;
         }
 
         private static decimal RootWithEnchancedPrecision(double currentEstimatedValue, long number, int root, double epsilon)
         {
-            decimal valueEstimatedPrecise = (decimal)currentEstimatedValue;
-            decimal currentError = Abs(number - Pow(valueEstimatedPrecise, root));
+            decimal rootValueEstimatedPrecise = (decimal)currentEstimatedValue;
+            decimal currentError = Abs(number - Pow(rootValueEstimatedPrecise, root));
             decimal previousError;
 
             while ((decimal)epsilon < currentError)
             {
                 previousError = currentError;
-                valueEstimatedPrecise = (1 / (decimal)root) * (((decimal)root - 1) * valueEstimatedPrecise + number / Pow(valueEstimatedPrecise, root - 1));
-                currentError = Abs(number - Pow(valueEstimatedPrecise, root));
+                rootValueEstimatedPrecise = (1 / (decimal)root) * (((decimal)root - 1) * rootValueEstimatedPrecise + number / Pow(rootValueEstimatedPrecise, root - 1));
+                currentError = Abs(number - Pow(rootValueEstimatedPrecise, root));
 
                 if (previousError <= currentError)
                 {                
@@ -97,7 +97,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
                 }
             }
 
-            return valueEstimatedPrecise;
+            return rootValueEstimatedPrecise;
         }
 
         private static bool IsRootInputValidate(long number, int root)
