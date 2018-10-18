@@ -53,16 +53,12 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             return powPartial * powPartial;
         }
 
-        //99999999999999999
-        //66666666666666666
-        //55555555555555555
         public static decimal Root(long rBase, int root, double epsilon)
         {
             if (!IsRootInputValidate(rBase, root))
                 throw new ArgumentOutOfRangeException("root base should have maximum 17 digits and root should be between 0 and 10");
             
             double valueEstimated = rBase;
-            double valueEstimatedPrevious;
             double currentError = Abs(rBase - Pow(valueEstimated, root));
             double previousError;
         
@@ -70,7 +66,6 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             {
                 previousError = currentError;
 
-                valueEstimatedPrevious = valueEstimated;
                 valueEstimated = (1 / (double)root) * (((double)root - 1) * valueEstimated + rBase / Pow(valueEstimated, root - 1));
 
                 currentError = Abs(rBase - Pow(valueEstimated, root));
@@ -80,8 +75,6 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
                     decimal valueEstimatedPrecise = RootWithEnchancedPrecision(valueEstimated, rBase, root, epsilon);
                     return valueEstimatedPrecise;
                 }
-
-
             }
 
             return (decimal)valueEstimated;
