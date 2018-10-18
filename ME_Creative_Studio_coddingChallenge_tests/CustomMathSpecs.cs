@@ -71,20 +71,62 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
             int root = 2;
             double epsilon = 0.01;
 
-            double result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(rBase, root, epsilon);
 
-            Assert.IsTrue(CustomMath.Abs((result * result) - rBase) < epsilon);
+            Assert.IsTrue(CustomMath.Abs((result * result) - rBase) < (decimal)epsilon);
+        }
+
+        [TestMethod]
+        public void Root_ShouldCalculate10thRootOfNumberWithinGivenEpsilon()
+        {
+            long rBase = 1024;
+            int root = 10;
+            double epsilon = 0.01;
+
+            decimal result = CustomMath.Root(rBase, root, epsilon);
+
+
+            Assert.IsTrue(CustomMath.Abs(
+                (result * result * result * result * result *
+                result * result * result * result * result ) - rBase) < (decimal)epsilon);
+        }
+
+        [TestMethod]
+        public void Root_ShouldCalculate10thRootOfLargeNumberWithinGivenEpsilon()
+        {
+            long rBase = 99999999999999999;
+            int root = 10;
+            double epsilon = 0.01;
+
+            decimal result = CustomMath.Root(rBase, root, epsilon);
+
+
+            Assert.IsTrue(CustomMath.Abs(
+                (result * result * result * result * result *
+                result * result * result * result * result) - rBase) < (decimal)epsilon);
+        }
+
+        [TestMethod]
+        public void Root_ShouldCalculateSquareRootOfLargeNumberWithinGivenEpsilon()
+        {
+            long rBase = 99999999999999999;
+            int root = 2;
+            double epsilon = 0.01;
+
+            decimal result = CustomMath.Root(rBase, root, epsilon);
+
+            Assert.IsTrue(CustomMath.Abs((result * result) - rBase) < (decimal)epsilon);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void Root_ShouldThrowExceptionWhenRbaseIsToLongerThan17()
+        public void Root_ShouldThrowExceptionWhenRbaseIsLongerThan17()
         {
             long rBase = 123456789123456789;
             int root = 2;
             double epsilon = 0.01;
 
-            double result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(rBase, root, epsilon);
         }
 
         [TestMethod]
@@ -95,7 +137,7 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
             int root = 0;
             double epsilon = 0.01;
 
-            double result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(rBase, root, epsilon);
         }
 
         [TestMethod]
@@ -106,7 +148,7 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
             int root = 11;
             double epsilon = 0.01;
 
-            double result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(rBase, root, epsilon);
         }
     }
 }

@@ -9,8 +9,8 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
         {
             long number;
             int root;
-            double epsilon = 0.01d;
-          
+            double epsilon = 0.0001d;
+
             try
             {
                 System.Console.WriteLine("Input number");
@@ -18,7 +18,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
                 System.Console.WriteLine("Input root");
                 root = int.Parse(System.Console.ReadLine());
 
-                double value = CustomMath.Root(number, root, epsilon);
+                decimal value = CustomMath.Root(number, root, epsilon);
                 System.Console.WriteLine(root + "th root of number " + number + " is: " + value + " with estimated max error of: " + epsilon);
             }
             catch (Exception ex)
