@@ -3,31 +3,31 @@ using ME_Creative_Studio_codingChallenge_SKaczorowski;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
-namespace ME_Creative_Studio_coddingChallenge_Specs
+namespace ME_Creative_Studio_coddingChallenge_Tests
 {
     [TestClass]
-    public class CustomMathSpecs
+    public class CustomMathTests
     {
         [TestMethod]
         public void Pow_ForBase3AndExponent3ShouldReturn27()
         {
-            double pbase = 3;
+            double number = 3;
             int exponent = 3;
             double expected = 27;
 
-            double result = CustomMath.Pow(pbase, exponent);
-
+            double result = CustomMath.Pow(number, exponent);
+            
             Assert.AreEqual(expected, result);
         }
 
         [TestMethod]
         public void Pow_ShouldReturnSameNumberWhenExponentIs1()
         {
-            double pbase = 3;
+            double number = 3;
             int exponent = 1;
             double expected = 3;
 
-            double result = CustomMath.Pow(pbase, exponent);
+            double result = CustomMath.Pow(number, exponent);
 
             Assert.AreEqual(expected, result);
         }
@@ -35,11 +35,11 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
         [TestMethod]
         public void Pow_ShouldReturn1WhenExponentIs0()
         {
-            double pbase = 3;
+            double number = 3;
             int exponent = 0;
             double expected = 1;
 
-            double result = CustomMath.Pow(pbase, exponent);
+            double result = CustomMath.Pow(number, exponent);
 
             Assert.AreEqual(expected, result);
         }
@@ -47,108 +47,108 @@ namespace ME_Creative_Studio_coddingChallenge_Specs
         [TestMethod]
         public void Abs_ShouldReturnPositiveNumberWhenGivenNegativeNumber()
         {
-            double numberToAbs = -5;
+            double number = -5;
             double expected = 5;
 
-            double result = CustomMath.Abs(numberToAbs);
+            double result = CustomMath.Abs(number);
             Assert.AreEqual(expected, result);
         }
 
         [TestMethod]
         public void Abs_ShouldReturnSameNumberWhenGivenPositiveNumber()
         {
-            double numberToAbs = 5;
+            double number = 5;
             double expected = 5;
 
-            double result = CustomMath.Abs(numberToAbs);
+            double result = CustomMath.Abs(number);
             Assert.AreEqual(expected, result);
         }
 
         [TestMethod]
         public void Root_ShouldCalculateSquareRootOfNumberWithinGivenEpsilon()
         {
-            long rBase = 4;
+            long number = 4;
             int root = 2;
             double epsilon = 0.01;
 
-            decimal result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(number, root, epsilon);
 
-            Assert.IsTrue(CustomMath.Abs((result * result) - rBase) < (decimal)epsilon);
+            Assert.IsTrue(CustomMath.Abs((result * result) - number) < (decimal)epsilon);
         }
 
         [TestMethod]
         public void Root_ShouldCalculate10thRootOfNumberWithinGivenEpsilon()
         {
-            long rBase = 1024;
+            long number = 1024;
             int root = 10;
             double epsilon = 0.01;
 
-            decimal result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(number, root, epsilon);
 
 
             Assert.IsTrue(CustomMath.Abs(
                 (result * result * result * result * result *
-                result * result * result * result * result ) - rBase) < (decimal)epsilon);
+                result * result * result * result * result ) - number) < (decimal)epsilon);
         }
 
         [TestMethod]
         public void Root_ShouldCalculate10thRootOfLargeNumberWithinGivenEpsilon()
         {
-            long rBase = 99999999999999999;
+            long number = 99999999999999999;
             int root = 10;
             double epsilon = 0.01;
 
-            decimal result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(number, root, epsilon);
 
 
             Assert.IsTrue(CustomMath.Abs(
                 (result * result * result * result * result *
-                result * result * result * result * result) - rBase) < (decimal)epsilon);
+                result * result * result * result * result) - number) < (decimal)epsilon);
         }
 
         [TestMethod]
         public void Root_ShouldCalculateSquareRootOfLargeNumberWithinGivenEpsilon()
         {
-            long rBase = 99999999999999999;
+            long number = 99999999999999999;
             int root = 2;
             double epsilon = 0.01;
 
-            decimal result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(number, root, epsilon);
 
-            Assert.IsTrue(CustomMath.Abs((result * result) - rBase) < (decimal)epsilon);
+            Assert.IsTrue(CustomMath.Abs((result * result) - number) < (decimal)epsilon);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Root_ShouldThrowExceptionWhenRbaseIsLongerThan17()
         {
-            long rBase = 123456789123456789;
+            long number = 123456789123456789;
             int root = 2;
             double epsilon = 0.01;
 
-            decimal result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(number, root, epsilon);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Root_ShouldThrowExceptionWhenRootIsLowerThan1()
         {
-            long rBase = 4;
+            long number = 4;
             int root = 0;
             double epsilon = 0.01;
 
-            decimal result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(number, root, epsilon);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Root_ShouldThrowExceptionWhenRootIsHigherThan10()
         {
-            long rBase = 4;
+            long number = 4;
             int root = 11;
             double epsilon = 0.01;
 
-            decimal result = CustomMath.Root(rBase, root, epsilon);
+            decimal result = CustomMath.Root(number, root, epsilon);
         }
     }
 }

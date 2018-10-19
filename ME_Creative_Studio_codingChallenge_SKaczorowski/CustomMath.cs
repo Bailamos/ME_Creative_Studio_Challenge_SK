@@ -19,9 +19,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             double powPartial;
 
             if (exponent == 0)
-            {
                 return 1.0d;
-            }
 
             if (exponent % 2 == 1)
             {
@@ -38,9 +36,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             decimal powPartial;
 
             if (exponent == 0)
-            {
                 return 1.0m;
-            }
 
             if (exponent % 2 == 1)
             {
@@ -66,7 +62,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             while (epsilon < currentError)
             {
                 previousError = currentError;
-                rootValueEstimated = (1 / (double)root) * (((double)root - 1) * rootValueEstimated + number / Pow(rootValueEstimated, root - 1));
+                rootValueEstimated = (1.0d / root) * ((root - 1.0d) * rootValueEstimated + number / Pow(rootValueEstimated, root - 1));
                 currentError = Abs(number - Pow(rootValueEstimated, root));
 
                 if (previousError <= currentError)
@@ -88,13 +84,11 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             while ((decimal)epsilon < currentError)
             {
                 previousError = currentError;
-                rootValueEstimatedPrecise = (1 / (decimal)root) * (((decimal)root - 1) * rootValueEstimatedPrecise + number / Pow(rootValueEstimatedPrecise, root - 1));
+                rootValueEstimatedPrecise = (1.0m / root) * ((root - 1.0m) * rootValueEstimatedPrecise + number / Pow(rootValueEstimatedPrecise, root - 1));
                 currentError = Abs(number - Pow(rootValueEstimatedPrecise, root));
 
-                if (previousError <= currentError)
-                {                
+                if (previousError <= currentError)            
                     break;
-                }
             }
 
             return rootValueEstimatedPrecise;
@@ -102,10 +96,8 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 
         private static bool IsRootInputValidate(long number, int root)
         {
-            if (root > 0 && root <= 10 && 
-                number.ToString().Length > 0  && number.ToString().Length <= 17)
-                return true;
-            return false;
+            return root > 0 && root <= 10 &&
+                number.ToString().Length > 0 && number.ToString().Length <= 17;
         }
     }
 }
