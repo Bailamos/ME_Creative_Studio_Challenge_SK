@@ -10,7 +10,8 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             long number;
             int root;
             double epsilon = 0.0001d;
-
+            System.Console.WriteLine(CustomMath.Pow(1.234567m, 3));
+            System.Console.WriteLine(CustomMath.Pow(1.234567d, 3));
             try
             {
                 Console.WriteLine("Input number");
