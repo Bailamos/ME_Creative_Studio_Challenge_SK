@@ -9,7 +9,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
     public class CustomMathTests
     {
         [TestMethod]
-        public void Pow_ForBase3AndExponent3ShouldReturn27()
+        public void Pow_ShouldRaiseNumberToGivenExponent()
         {
             double number = 3;
             int exponent = 3;
