@@ -9,9 +9,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
         {
             long number;
             int root;
-            double epsilon = 0.0001d;
-            System.Console.WriteLine(CustomMath.Pow(1.234567m, 3));
-            System.Console.WriteLine(CustomMath.Pow(1.234567d, 3));
+
             try
             {
                 Console.WriteLine("Input number");
@@ -19,8 +17,9 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
                 Console.WriteLine("Input root");
                 root = int.Parse(Console.ReadLine());
 
-                decimal value = CustomMath.Root(number, root, epsilon);
-                Console.WriteLine("{0} th root of number {1} is: {2} with estimated max error of: {3}", root, number, value, epsilon);
+                double value = CustomMath.Root(number, root);
+                Console.WriteLine("{0} th root of number {1} is: {2}", root, number, value);
+                Console.WriteLine("{0} th root of number {1} is: {2}", root, number, (decimal)value);
             }
             catch (ArgumentOutOfRangeException ex)
             {

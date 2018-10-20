@@ -4,68 +4,50 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 {
     public static partial class CustomMath
     {
+        private static double TARGET_EPSILON = 0.0001d;
+
         public static double Abs(double number)
         {
-            return AbsGeneric(number);
-        }
-
-        public static decimal Abs(decimal number)
-        {
-            return AbsGeneric(number);
+            return number > 0 ? number : -number;
         }
 
         public static double Pow(double number, int exponent)
         {
-            return PowGeneric(number, exponent);
+            double powPartial;
+
+            if (exponent == 0)
+                return 1.0d;
+
+            if (exponent % 2 == 1)
+            {
+                powPartial = Pow(number, (exponent - 1) / 2);
+                return number * powPartial * powPartial;
+            }
+
+            powPartial = Pow(number, exponent / 2);
+            return powPartial * powPartial;
         }
 
-        public static decimal Pow(decimal number, int exponent)
-        {
-            return PowGeneric(number, exponent);
-        }
-
-        public static decimal Root(long number, int root, double epsilon)
+        public static double Root(long number, int root)
         {
             if (!IsRootInputValid(number, root))
                 throw new ArgumentOutOfRangeException("number should have maximum 17 digits and root should be between 1 and 10");
 
-            double rootValueEstimated = number;
-            double currentError = Abs(number - Pow(rootValueEstimated, root));
+            double rootValueEstimation = number;
+            double currentError = Abs(number - Pow(rootValueEstimation, root));
             double previousError;
 
-            while (epsilon < currentError)
+            while (TARGET_EPSILON < currentError)
             {
                 previousError = currentError;
-                rootValueEstimated = (1.0d / root) * ((root - 1.0d) * rootValueEstimated + number / Pow(rootValueEstimated, root - 1));
-                currentError = Abs(number - Pow(rootValueEstimated, root));
-
-                if (previousError <= currentError)
-                {
-                    decimal valueEstimatedPrecise = RootWithEnhancedPrecision(rootValueEstimated, number, root, epsilon);
-                    return valueEstimatedPrecise;
-                }
-            }
-
-            return (decimal)rootValueEstimated;
-        }
-
-        private static decimal RootWithEnhancedPrecision(double currentEstimatedValue, long number, int root, double epsilon)
-        {
-            decimal rootValueHighPrecisionEstimated = (decimal)currentEstimatedValue;
-            decimal currentError = Abs(number - Pow(rootValueHighPrecisionEstimated, root));
-            decimal previousError;
-
-            while ((decimal)epsilon < currentError)
-            {
-                previousError = currentError;
-                rootValueHighPrecisionEstimated = (1.0m / root) * ((root - 1.0m) * rootValueHighPrecisionEstimated + number / Pow(rootValueHighPrecisionEstimated, root - 1));
-                currentError = Abs(number - Pow(rootValueHighPrecisionEstimated, root));
+                rootValueEstimation = (1.0d / root) * ((root - 1.0d) * rootValueEstimation + number / Pow(rootValueEstimation, root - 1));
+                currentError = Abs(number - (Pow(rootValueEstimation, root)));
 
                 if (previousError <= currentError)
                     break;
             }
 
-            return rootValueHighPrecisionEstimated;
+            return rootValueEstimation;
         }
 
         private static bool IsRootInputValid(long number, int root)
