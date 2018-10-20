@@ -19,7 +19,6 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 
                 double value = CustomMath.Root(number, root);
                 Console.WriteLine("{0} th root of number {1} is: {2}", root, number, value);
-                Console.WriteLine("{0} th root of number {1} is: {2}", root, number, (decimal)value);
             }
             catch (ArgumentOutOfRangeException ex)
             {

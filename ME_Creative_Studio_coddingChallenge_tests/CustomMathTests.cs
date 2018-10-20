@@ -8,14 +8,18 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
     [TestClass]
     public class CustomMathTests
     {
-        private const double PERCENTAGE_ERROR = 0.0000001d;
+        private const double TARGET_EPSILON = 0.0001d;
 
-        [TestMethod]
-        public void Pow_ShouldRaiseNumberToGivenExponent()
+        [DataTestMethod]
+        [DataRow(3, 3, 27)]
+        [DataRow(2, 2, 4)]
+        [DataRow(4, 3, 64)]
+        [DataRow(10, 2, 100)]
+        public void Pow_ShouldRaiseNumberToGivenExponent(double n, int e, double exp)
         {
-            double number = 3;
-            int exponent = 3;
-            double expected = 27;
+            double number = n;
+            int exponent = e;
+            double expected = exp;
 
             double result = CustomMath.Pow(number, exponent);
 
@@ -67,6 +71,11 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
         }
 
         [DataTestMethod]
+        [DataRow(0, 2)]
+        [DataRow(1, 2)]
+        [DataRow(1, 5)]
+        [DataRow(5, 7)]
+        [DataRow(7, 10)]
         [DataRow(1024, 1)]
         [DataRow(1024, 2)]
         [DataRow(1024, 3)]
@@ -77,11 +86,6 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
         [DataRow(1024, 8)]
         [DataRow(1024, 9)]
         [DataRow(1024, 10)]
-        [DataRow(32, 5)]
-        [DataRow(200, 7)]
-        [DataRow(1, 2)]
-        [DataRow(1, 5)]
-        [DataRow(0, 2)]
         public void Root_ShouldCalculateRootOfNumber(long n, int r)
         {
             long number = n;
@@ -90,10 +94,13 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= (number * PERCENTAGE_ERROR));
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_EPSILON);
         }
 
         [DataTestMethod]
+        [DataRow(11111111111111111, 2)]
+        [DataRow(44444444444444444, 2)]
+        [DataRow(44444444444444444, 10)]
         [DataRow(99999999999999999, 1)]
         [DataRow(99999999999999999, 2)]
         [DataRow(99999999999999999, 3)]
@@ -104,8 +111,6 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
         [DataRow(99999999999999999, 8)]
         [DataRow(99999999999999999, 9)]
         [DataRow(99999999999999999, 10)]
-        [DataRow(11111111111111111, 2)]
-        [DataRow(44444444444444444, 10)]
         public void Root_ShouldCalculateRootOfLargeNumber(long n, int r)
         {
             long number = n;
@@ -114,7 +119,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= (number * PERCENTAGE_ERROR));
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_EPSILON);
         }
 
         [TestMethod]
