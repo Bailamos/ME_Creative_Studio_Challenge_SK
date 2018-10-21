@@ -9,7 +9,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
         {
             long number;
             int root;
-
+         
             try
             {
                 Console.WriteLine("Input number");

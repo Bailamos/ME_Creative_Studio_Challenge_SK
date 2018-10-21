@@ -8,19 +8,22 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
     [TestClass]
     public class CustomMathTests
     {
-        private const double TARGET_ERROR = 0.000001d;
+        private const double TARGET_ERROR_ROOT = 0.000001d;
 
         [DataTestMethod]
         [DataRow(0, 1, 0)]
-        [DataRow(55,1, 55)]
+        [DataRow(3, 1, 3)]
+        [DataRow(-3, 1, -3)]
         [DataRow(2, 2, 4)]
         [DataRow(3, 3, 27)]
         [DataRow(4, 3, 64)]
         [DataRow(10, 2, 100)]
-        [DataRow(-10, 9, -1000000000)]
         [DataRow(10, 10, 10000000000)]
-        [DataRow(double.MaxValue, int.MaxValue, double.PositiveInfinity)]
-        [DataRow(double.MinValue, int.MaxValue, double.NegativeInfinity)]
+        [DataRow(-10, 9, -1000000000)]
+        [DataRow(5.5, 2, 30.25)]
+        [DataRow(3.141, 2, 9.865881)]
+        [DataRow(3.1415926, 2, 9.86960406437476)]
+        [DataRow(3.14159265358979, 2, 9.869604401089338)]
         public void Pow_ShouldRaiseNumberToGivenExponent(double n, int e, double exp)
         {
             double number = n;
@@ -51,6 +54,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double expected = 5;
 
             double result = CustomMath.Abs(number);
+
             Assert.AreEqual(expected, result);
         }
 
@@ -61,15 +65,15 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double expected = 5;
 
             double result = CustomMath.Abs(number);
+
             Assert.AreEqual(expected, result);
         }
 
         [DataTestMethod]
+        [DataRow(0, 1)]
         [DataRow(0, 2)]
         [DataRow(1, 1)]
         [DataRow(1, 2)]
-        [DataRow(5, 7)]
-        [DataRow(7, 10)]
         [DataRow(1000, 1)]
         [DataRow(1000, 2)]
         [DataRow(1000, 3)]
@@ -88,11 +92,12 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR * number);
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR_ROOT * number);
         }
 
         [DataTestMethod]
         [DataRow(11111111111111111, 2)]
+        [DataRow(11111111111111111, 10)]
         [DataRow(44444444444444444, 2)]
         [DataRow(44444444444444444, 10)]
         [DataRow(99999999999999999, 1)]
@@ -113,7 +118,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR * number);
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR_ROOT * number);
         }
 
         [TestMethod]
