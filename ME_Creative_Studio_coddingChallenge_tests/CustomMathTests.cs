@@ -9,31 +9,33 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
     public class CustomMathTests
     {
         private const decimal TARGET_ERROR_ROOT = 0.000001m;
-        private const decimal TARGET_ERROR_POW = 0.000001m;
+        private const string DECIMAL_MAX_VALUE = "79228162514264337593543950335";
 
         [DataTestMethod]
-        [DataRow(0, 1, 0)]
-        [DataRow(3, 1, 3)]
-        [DataRow(-3, 1, -3)]
-        [DataRow(2, 2, 4)]
-        [DataRow(3, 3, 27)]
-        [DataRow(4, 3, 64)]
-        [DataRow(10, 2, 100)]
-        [DataRow(10, 10, 10000000000)]
-        [DataRow(-10, 9, -1000000000)]
-        [DataRow(5.5, 2, 30.25)]
-        [DataRow(3.141, 2, 9.865881)]
-        [DataRow(3.1415926, 2, 9.86960406437476)]
-        [DataRow(3.14159265358979, 2, 9.869604401089338)]
-        public void Pow_ShouldRaiseNumberToGivenExponent(double n, int e, double exp)
+        [DataRow("0", 1, "0")]
+        [DataRow("3", 1, "3")]
+        [DataRow("-3", 1, "-3")]
+        [DataRow("2", 2, "4")]
+        [DataRow("3", 3, "27")]
+        [DataRow("4", 3, "64")]
+        [DataRow("10", 2, "100")]
+        [DataRow("10", 10, "10000000000")]
+        [DataRow("-10", 9, "-1000000000")]
+        [DataRow("5,5", 2, "30,25")]
+        [DataRow("3,141", 2, "9,865881")]
+        [DataRow("3,1415926", 2, "9,86960406437476")]
+        [DataRow("3,14159265358979", 2, "9,8696044010893382709735922441")]
+        [DataRow("99999999999999999", 2, DECIMAL_MAX_VALUE)]
+        [DataRow("99999999999999999", 10, DECIMAL_MAX_VALUE)]
+        public void Pow_ShouldRaiseNumberToGivenExponent(string n, int e, string exp)
         {
-            decimal number = (decimal)n;
+            decimal number = decimal.Parse(n);
             int exponent = e;
-            decimal expected = (decimal)exp;
+            decimal expected = decimal.Parse(exp);
 
             decimal result = CustomMath.Pow(number, exponent);
 
-            Assert.IsTrue(CustomMath.Abs(result - expected) < TARGET_ERROR_POW);
+            Assert.AreEqual(result, expected);          
         }
 
         [TestMethod]
