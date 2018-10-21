@@ -4,7 +4,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 {
     public static partial class CustomMath
     {
-        private static double TARGET_EPSILON = 0.000001d;
+        private const double TARGET_EPSILON = 0.000001d;
 
         public static double Abs(double number)
         {
