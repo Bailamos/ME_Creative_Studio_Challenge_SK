@@ -4,7 +4,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 {
     public static partial class CustomMath
     {
-        private static double TARGET_EPSILON = 0.0001d;
+        private static double TARGET_EPSILON = 0.000001d;
 
         public static double Abs(double number)
         {
@@ -33,21 +33,21 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             if (!IsRootInputValid(number, root))
                 throw new ArgumentOutOfRangeException("number should have maximum 17 digits and root should be between 1 and 10");
 
-            double rootValueEstimation = number;
-            double currentError = Abs(number - Pow(rootValueEstimation, root));
+            double rootEstimation = number;
+            double currentError = Abs(number - Pow(rootEstimation, root));
             double previousError;
 
             while (TARGET_EPSILON < currentError)
             {
                 previousError = currentError;
-                rootValueEstimation = (1.0d / root) * ((root - 1.0d) * rootValueEstimation + number / Pow(rootValueEstimation, root - 1));
-                currentError = Abs(number - (Pow(rootValueEstimation, root)));
+                rootEstimation = (1.0d / root) * ((root - 1.0d) * rootEstimation + number / Pow(rootEstimation, root - 1));
+                currentError = Abs(number - (Pow(rootEstimation, root)));
 
                 if (previousError <= currentError)
                     break;
             }
 
-            return rootValueEstimation;
+            return rootEstimation;
         }
 
         private static bool IsRootInputValid(long number, int root)

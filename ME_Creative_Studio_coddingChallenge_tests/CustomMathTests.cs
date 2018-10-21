@@ -8,30 +8,24 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
     [TestClass]
     public class CustomMathTests
     {
-        private const double TARGET_EPSILON = 0.0001d;
+        private const double TARGET_ERROR = 0.000001d;
 
         [DataTestMethod]
-        [DataRow(3, 3, 27)]
+        [DataRow(0, 1, 0)]
+        [DataRow(55,1, 55)]
         [DataRow(2, 2, 4)]
+        [DataRow(3, 3, 27)]
         [DataRow(4, 3, 64)]
         [DataRow(10, 2, 100)]
+        [DataRow(-10, 9, -1000000000)]
+        [DataRow(10, 10, 10000000000)]
+        [DataRow(double.MaxValue, int.MaxValue, double.PositiveInfinity)]
+        [DataRow(double.MinValue, int.MaxValue, double.NegativeInfinity)]
         public void Pow_ShouldRaiseNumberToGivenExponent(double n, int e, double exp)
         {
             double number = n;
             int exponent = e;
             double expected = exp;
-
-            double result = CustomMath.Pow(number, exponent);
-
-            Assert.AreEqual(expected, result);
-        }
-
-        [TestMethod]
-        public void Pow_ShouldReturnSameNumberWhenExponentIs1()
-        {
-            double number = 3;
-            int exponent = 1;
-            double expected = 3;
 
             double result = CustomMath.Pow(number, exponent);
 
@@ -72,20 +66,20 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
 
         [DataTestMethod]
         [DataRow(0, 2)]
+        [DataRow(1, 1)]
         [DataRow(1, 2)]
-        [DataRow(1, 5)]
         [DataRow(5, 7)]
         [DataRow(7, 10)]
-        [DataRow(1024, 1)]
-        [DataRow(1024, 2)]
-        [DataRow(1024, 3)]
-        [DataRow(1024, 4)]
-        [DataRow(1024, 5)]
-        [DataRow(1024, 6)]
-        [DataRow(1024, 7)]
-        [DataRow(1024, 8)]
-        [DataRow(1024, 9)]
-        [DataRow(1024, 10)]
+        [DataRow(1000, 1)]
+        [DataRow(1000, 2)]
+        [DataRow(1000, 3)]
+        [DataRow(1000, 4)]
+        [DataRow(1000, 5)]
+        [DataRow(1000, 6)]
+        [DataRow(1000, 7)]
+        [DataRow(1000, 8)]
+        [DataRow(1000, 9)]
+        [DataRow(1000, 10)]
         public void Root_ShouldCalculateRootOfNumber(long n, int r)
         {
             long number = n;
@@ -94,7 +88,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_EPSILON);
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR * number);
         }
 
         [DataTestMethod]
@@ -119,7 +113,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_EPSILON);
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR * number);
         }
 
         [TestMethod]
@@ -129,7 +123,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             long number = 123456789123456789;
             int root = 2;
 
-            double result = CustomMath.Root(number, root);
+            CustomMath.Root(number, root);
         }
 
         [TestMethod]
@@ -139,7 +133,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             long number = 4;
             int root = 0;
 
-            double result = CustomMath.Root(number, root);
+            CustomMath.Root(number, root);
         }
 
         [TestMethod]
@@ -149,7 +143,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             long number = 4;
             int root = 11;
 
-            double result = CustomMath.Root(number, root);
+            CustomMath.Root(number, root);
         }
     }
 }
