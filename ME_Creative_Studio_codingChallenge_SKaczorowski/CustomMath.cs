@@ -48,7 +48,6 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             while (TARGET_EPSILON < currentError)
             {
                 previousError = currentError;
-                Console.WriteLine(Pow(rootEstimation, root - 1));
                 decimal rootEstimationTmp = (1.0m / root) * ((root - 1.0m) * rootEstimation + number / Pow(rootEstimation, root - 1));
                 currentError = Abs(number - (Pow(rootEstimationTmp, root)));
 
