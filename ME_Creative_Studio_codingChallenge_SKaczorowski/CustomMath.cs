@@ -4,46 +4,55 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 {
     public static partial class CustomMath
     {
-        private const double TARGET_EPSILON = 0.000001d;
+        private const decimal TARGET_EPSILON = 0.000001m;
 
-        public static double Abs(double number)
+        public static decimal Abs(decimal number)
         {
             return number > 0 ? number : -number;
         }
 
-        public static double Pow(double number, int exponent)
+        public static decimal Pow(decimal number, int exponent)
         {
-            double powPartial;
+            decimal powPartial;
 
             if (exponent == 0)
-                return 1.0d;
+                return 1.0m;
 
-            if (exponent % 2 == 1)
+            try
             {
-                powPartial = Pow(number, (exponent - 1) / 2);
-                return number * powPartial * powPartial;
-            }
+                if (exponent % 2 == 1)
+                {
+                    powPartial = Pow(number, (exponent - 1) / 2);
+                    return number * powPartial * powPartial;
+                }
 
-            powPartial = Pow(number, exponent / 2);
-            return powPartial * powPartial;
+                powPartial = Pow(number, exponent / 2);
+                return powPartial * powPartial;
+
+            }
+            catch (OverflowException)
+            {
+                return decimal.MaxValue;
+            }
         }
 
-        public static double Root(long number, int root)
+        public static decimal Root(long number, int root)
         {
             if (!IsRootInputValid(number, root))
                 throw new ArgumentOutOfRangeException("number should have maximum 17 digits and root should be between 1 and 10");
 
-            double rootEstimation = number;
-            double currentError = Abs(number - Pow(rootEstimation, root));
-            double previousError;
+            decimal rootEstimation = number;
+            decimal currentError = Abs(number - Pow(rootEstimation, root));
+            decimal previousError;
 
             while (TARGET_EPSILON < currentError)
             {
                 previousError = currentError;
-                double rootEstimationTmp = (1.0d / root) * ((root - 1.0d) * rootEstimation + number / Pow(rootEstimation, root - 1));
+                Console.WriteLine(Pow(rootEstimation, root - 1));
+                decimal rootEstimationTmp = (1.0m / root) * ((root - 1.0m) * rootEstimation + number / Pow(rootEstimation, root - 1));
                 currentError = Abs(number - (Pow(rootEstimationTmp, root)));
 
-                if (previousError <= currentError)
+                if (previousError <= currentError && currentError < number)
                     break;
 
                 rootEstimation = rootEstimationTmp;

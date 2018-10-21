@@ -8,7 +8,8 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
     [TestClass]
     public class CustomMathTests
     {
-        private const double TARGET_ERROR_ROOT = 0.000001d;
+        private const decimal TARGET_ERROR_ROOT = 0.000001m;
+        private const decimal TARGET_ERROR_POW = 0.000001m;
 
         [DataTestMethod]
         [DataRow(0, 1, 0)]
@@ -26,23 +27,23 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
         [DataRow(3.14159265358979, 2, 9.869604401089338)]
         public void Pow_ShouldRaiseNumberToGivenExponent(double n, int e, double exp)
         {
-            double number = n;
+            decimal number = (decimal)n;
             int exponent = e;
-            double expected = exp;
+            decimal expected = (decimal)exp;
 
-            double result = CustomMath.Pow(number, exponent);
+            decimal result = CustomMath.Pow(number, exponent);
 
-            Assert.AreEqual(expected, result);
+            Assert.IsTrue(CustomMath.Abs(result - expected) < TARGET_ERROR_POW);
         }
 
         [TestMethod]
         public void Pow_ShouldReturn1WhenExponentIs0()
         {
-            double number = 3;
+            decimal number = 3;
             int exponent = 0;
-            double expected = 1;
+            decimal expected = 1;
 
-            double result = CustomMath.Pow(number, exponent);
+            decimal result = CustomMath.Pow(number, exponent);
 
             Assert.AreEqual(expected, result);
         }
@@ -50,10 +51,10 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
         [TestMethod]
         public void Abs_ShouldReturnPositiveNumberWhenGivenNegativeNumber()
         {
-            double number = -5;
-            double expected = 5;
+            decimal number = -5;
+            decimal expected = 5;
 
-            double result = CustomMath.Abs(number);
+            decimal result = CustomMath.Abs(number);
 
             Assert.AreEqual(expected, result);
         }
@@ -61,10 +62,10 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
         [TestMethod]
         public void Abs_ShouldReturnSameNumberWhenGivenPositiveNumber()
         {
-            double number = 5;
-            double expected = 5;
+            decimal number = 5;
+            decimal expected = 5;
 
-            double result = CustomMath.Abs(number);
+            decimal result = CustomMath.Abs(number);
 
             Assert.AreEqual(expected, result);
         }
@@ -89,7 +90,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             long number = n;
             int root = r;
 
-            double result = CustomMath.Root(number, root);
+            decimal result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
                 CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR_ROOT * number);
@@ -115,7 +116,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             long number = n;
             int root = r;
 
-            double result = CustomMath.Root(number, root);
+            decimal result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
                 CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR_ROOT * number);
