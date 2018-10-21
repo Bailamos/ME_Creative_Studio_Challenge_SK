@@ -8,7 +8,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
     [TestClass]
     public class CustomMathTests
     {
-        private const double TARGET_ERROR_ROOT = 0.000001d;
+        private const double ROOT_TARGET_ERROR = 0.000001d;
 
         [DataTestMethod]
         [DataRow(0, 1, 0)]
@@ -92,7 +92,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR_ROOT * number);
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= ROOT_TARGET_ERROR * number);
         }
 
         [DataTestMethod]
@@ -118,7 +118,7 @@ namespace ME_Creative_Studio_coddingChallenge_Tests
             double result = CustomMath.Root(number, root);
 
             Assert.IsTrue(
-                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= TARGET_ERROR_ROOT * number);
+                CustomMath.Abs(CustomMath.Pow(result, r) - number) <= ROOT_TARGET_ERROR * number);
         }
 
         [TestMethod]

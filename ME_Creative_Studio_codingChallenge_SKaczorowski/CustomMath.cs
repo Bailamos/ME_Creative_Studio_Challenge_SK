@@ -40,11 +40,13 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
             while (TARGET_EPSILON < currentError)
             {
                 previousError = currentError;
-                rootEstimation = (1.0d / root) * ((root - 1.0d) * rootEstimation + number / Pow(rootEstimation, root - 1));
-                currentError = Abs(number - (Pow(rootEstimation, root)));
+                double rootEstimationTmp = (1.0d / root) * ((root - 1.0d) * rootEstimation + number / Pow(rootEstimation, root - 1));
+                currentError = Abs(number - (Pow(rootEstimationTmp, root)));
 
                 if (previousError <= currentError)
                     break;
+
+                rootEstimation = rootEstimationTmp;
             }
 
             return rootEstimation;
