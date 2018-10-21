@@ -24,6 +24,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
                     powPartial = Pow(number, (exponent - 1) / 2);
                     return number * powPartial * powPartial;
                 }
+
                 powPartial = Pow(number, exponent / 2);
                 return powPartial * powPartial;
             }
