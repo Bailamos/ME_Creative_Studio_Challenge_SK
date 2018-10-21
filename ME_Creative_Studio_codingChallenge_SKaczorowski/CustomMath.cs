@@ -17,7 +17,6 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
 
             if (exponent == 0)
                 return 1.0m;
-
             try
             {
                 if (exponent % 2 == 1)
@@ -25,10 +24,8 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
                     powPartial = Pow(number, (exponent - 1) / 2);
                     return number * powPartial * powPartial;
                 }
-
                 powPartial = Pow(number, exponent / 2);
                 return powPartial * powPartial;
-
             }
             catch (OverflowException)
             {
