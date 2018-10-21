@@ -17,7 +17,7 @@ namespace ME_Creative_Studio_codingChallenge_SKaczorowski
                 Console.WriteLine("Input root");
                 root = int.Parse(Console.ReadLine());
 
-                decimal value = CustomMath.Root(number, root);
+                decimal value = CustomMath.Root(number, root);             
                 Console.WriteLine("{0} th root of number {1} is: {2}", root, number, value);
             }
             catch (ArgumentOutOfRangeException ex)
